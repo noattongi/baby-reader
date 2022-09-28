@@ -17,3 +17,12 @@ const wordSchema = new mongoose.Schema({
 })
 
 const Word = mongoose.model('Word', wordSchema);
+
+const save = (word) => {
+  const newWord = new Word({ word: word })
+  newWord.save((err) => {
+    if (err) return handleError(err);
+  })
+}
+
+module.exports = save;
