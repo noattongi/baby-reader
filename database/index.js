@@ -23,6 +23,7 @@ const save = (word) => {
   newWord.save((err) => {
     if (err) return handleError(err);
   })
+  return word;
 }
 
 module.exports = save;
