@@ -1,10 +1,13 @@
-import React, {ReactElement} from 'react';
+import React from 'react';
+import CardSet from '../components/CardSet';
 import Link from 'next/link';
 
-export default function Cards (): ReactElement {
+const Cards: React.FC = () => {
   return (
-    <div>
-      Cards
+    <div className='w-screen h-screen flex justify-center items-center bg-gray-300'>
+      <CardSet/>
     </div>
   )
 }
+
+export default Cards;
