@@ -4,10 +4,15 @@ import Link from 'next/link';
 
 const Cards: React.FC = () => {
   return (
-    <div className='w-screen h-screen flex justify-center items-center bg-gray-300'>
+    <div style={cards_page_styles}>
       <CardSet/>
     </div>
   )
+}
+
+const cards_page_styles: React.CSSProperties = {
+  height: '100%',
+  overflow: 'hidden',
 }
 
 export default Cards;

@@ -6,10 +6,19 @@ interface Props {
 
 const FlashCard: React.FC<Props> = ({word}: Props) => {
   return (
-    <div className="word-card flex justify-center items-center bg-white border border-solid border-black w-4/5 h-2/4 min-w-fit text-9xl text-red-600 font-medium">
+    <div style={word_card}>
       {word}
     </div>
   )
+}
+
+const word_card: React.CSSProperties = {
+  fontSize: '320px',
+  display: 'flex',
+  justifyContent: 'center',
+  alignItems: 'center',
+  color: '#EE0000',
+  fontWeight: '600'
 }
 
 export default FlashCard;
