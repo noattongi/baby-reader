@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from "react";
 import FlashCard from "./FlashCard";
+import Router from "next/router";
 
 const CardSet: React.FC = () => {
 
@@ -24,6 +25,9 @@ const CardSet: React.FC = () => {
     setTimeout(() => {
       setCurrentIndex(4);
     }, 10000)
+    setTimeout(() => {
+      Router.push('/home');
+    }, 13500)
   }
 
   const card_container: React.CSSProperties = {
@@ -34,7 +38,7 @@ const CardSet: React.FC = () => {
     gridTemplateRows: '100%',
     alignItems: 'center',
     justifyItems: 'center',
-    transition: 'transform 0.3s',
+    transition: 'transform 0.5s',
     transform: `translateX(-${currentIndex * 20}%)`
   }
 
