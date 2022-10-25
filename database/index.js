@@ -14,16 +14,17 @@ db.once('open', () => {
 const wordSchema = new mongoose.Schema({
   word: String,
   reads: { type: Number, default: 0},
+  category: String,
 })
 
 const Word = mongoose.model('Word', wordSchema);
 
 const save = (word) => {
   const newWord = new Word({ word: word })
-  newWord.save((err) => {
+  return newWord.save((err) => {
     if (err) return handleError(err);
+    else console.log(word);
   })
-  return word;
 }
 
 module.exports = save;

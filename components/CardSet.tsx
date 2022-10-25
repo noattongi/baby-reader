@@ -44,8 +44,8 @@ const CardSet: React.FC = () => {
 
   return (
     <div style={card_container}>
-      {words.map((word) => {
-        return <FlashCard word={word} />
+      {words.map((word, index) => {
+        return <FlashCard key={index} word={word} />
       })}
     </div>
   )

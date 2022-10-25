@@ -1,9 +1,9 @@
 const save = require('./index.js');
 
-const words = ['dog', 'cat', 'fork', 'refridgerator', 'toy'];
+const words = ['dog', 'cat', 'fork', 'refrigerator', 'toy'];
 
 for (word of words) {
-  save(word);
+  save(word)
 }
 
 console.log('database seeding complete');
