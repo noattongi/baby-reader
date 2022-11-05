@@ -10,6 +10,8 @@ app.get('/words', async(req, res) => {
   res.send(data);
 })
 
+app.
+
 app.listen(3001, () => {
   console.log('listening on port 3001');
 })
