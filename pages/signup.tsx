@@ -6,6 +6,12 @@ export default function Signup () {
   const [password, setPassword] = useState<string>('');
   const [confirmPassword, setConfirmPassword] = useState<string>('');
 
+  const handleSignup = (e: React.SyntheticEvent<HTMLButtonElement>) => {
+    //check inputs for requirements
+    //send post request
+    //redirect to login page
+  }
+
   return (
     <div>
       <label>
@@ -20,6 +26,8 @@ export default function Signup () {
         Confirm your password
       </label>
       <input type='text' onChange={(e) => setConfirmPassword(e.target.value)} />
+      <button onClick={handleSignup}>Sign up</button>
     </div>
+
   )
 }
