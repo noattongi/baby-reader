@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost/baby-reader');
+mongoose.connect('mongodb://localhost/babyreader');
 
 const db = mongoose.connection;
 
@@ -19,12 +19,18 @@ const wordSchema = new mongoose.Schema({
 
 const Word = mongoose.model('Word', wordSchema);
 
-const save = (word) => {
+const save = async(word) => {
   const newWord = new Word({ word: word })
-  return newWord.save((err) => {
-    if (err) return handleError(err);
-    else console.log(word);
-  })
+  var saved = await newWord.save()
+  return saved;
 }
 
-module.exports = save;
+const find = async() => {
+  const data = await Word.find({});
+  return data;
+}
+
+module.exports = {
+  save: save,
+  find: find
+};

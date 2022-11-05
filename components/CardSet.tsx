@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from "react";
 import FlashCard from "./FlashCard";
 import Router from "next/router";
+import axios from 'axios';
 
 const CardSet: React.FC = () => {
 
@@ -8,8 +9,20 @@ const CardSet: React.FC = () => {
 
   const [currentIndex, setCurrentIndex] = useState<number>(0);
 
+  const fetchAllWords = async() => {
+    console.log('made it to fetch');
+    await axios.get('http://127.0.0.1:3001/words')
+    .then((data) => {
+      console.log(data);
+    })
+    .catch((err) => {
+      console.log(err);
+    })
+  }
+
   useEffect(() => {
     cardTimer();
+    fetchAllWords();
   }, [])
 
   const cardTimer = () => {

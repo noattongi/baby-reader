@@ -1,10 +1,11 @@
-const save = require('./index.js');
+const {save, find} = require('./index.js');
 
 const words = ['dog', 'cat', 'fork', 'refrigerator', 'toy'];
 
-for (word of words) {
-  save(word)
+//this is no longer a seed function, use it to test db connection
+const seed = async() => {
+  var data = await find();
+  console.log(data);
 }
 
-console.log('database seeding complete');
-process.exit();
+seed();
