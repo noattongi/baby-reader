@@ -10,7 +10,12 @@ app.get('/words', async(req, res) => {
   res.send(data);
 })
 
-app.
+app.post('/signup', (req, res) => {
+  console.log(req.params);
+  //check if user already exists
+  //if it does send a failure response
+  //otherwise save the user and hash the password to be saved
+})
 
 app.listen(3001, () => {
   console.log('listening on port 3001');
