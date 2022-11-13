@@ -1,12 +1,15 @@
 import React, {useState} from 'react';
+import {useRouter} from 'next/router';
 
 export default function Signup () {
+  const router = useRouter();
 
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
   const [confirmPassword, setConfirmPassword] = useState<string>('');
   const [emailWarning, setEmailWarning] = useState<boolean>(false);
   const [passwordWarning, setPasswordWarning] = useState<boolean>(false);
+  const [passwordMatches, setPasswordMatches] = useState<boolean>(false);
 
 
   const validateEmail = (email: string) => {
@@ -14,28 +17,55 @@ export default function Signup () {
     var match = email.match(/^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/);
     if (match && match[0] === email) {
       setEmailWarning(false);
+      return true;
     } else {
       setEmailWarning(true);
+      return false;
     }
   }
 
   const validatePassword = (pass: string) => {
     if (pass.length < 10) {
       setPasswordWarning(true);
+      return false;
     } else {
       setPasswordWarning(false);
+      return true;
     }
   }
 
+  const checkPasswordsAreEqual = () => {
+    if (password === confirmPassword) {
+      setPasswordMatches(true);
+      return true;
+    } else {
+      setPasswordMatches(false);
+      return false;
+    }
+  }
+  //README - This function needs post request to be added for user login data
   const handleSignup = (e: React.SyntheticEvent<HTMLButtonElement>) => {
     //check inputs for requirements
-    //send post request
-    //redirect to login page
+    if (!validateEmail(email)) {
+      alert('Enter a valid email');
+      return;
+    }
+    if (!validatePassword(password)) {
+      alert('Enter a valid password');
+      return;
+    }
+    if (!checkPasswordsAreEqual()) {
+      alert('The passwords do not match');
+      return;
+    }
+    //reroute to login if all requirements are met
+    router.push('/login');
   }
 
   return (
     <div style={container}>
       <div style={signup}>
+        <h2 style={header}>Create a Baby Reader account</h2>
         <label style={input}>
           Email
         </label>
@@ -60,7 +90,7 @@ const container: React.CSSProperties = {
   display: 'flex',
   justifyContent: 'center',
   alignItems: 'center',
-  backgroundColor: 'lightblue',
+  backgroundColor: 'lightgrey',
   height: '100%',
 }
 
@@ -73,6 +103,10 @@ const signup: React.CSSProperties = {
   paddingLeft: '70px',
   backgroundColor: 'white',
   borderRadius: '10px',
+}
+
+const header: React.CSSProperties = {
+  marginTop: '20px'
 }
 
 const input: React.CSSProperties = {
@@ -95,8 +129,10 @@ const button: React.CSSProperties = {
   color: 'white',
   height: '40px',
   width: '90px',
+  alignSelf: 'center',
 }
 
 const warning: React.CSSProperties = {
   color: 'red',
+  fontSize: '13px'
 }
