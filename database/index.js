@@ -11,26 +11,25 @@ db.once('open', () => {
   console.log('mongoose connected successfully');
 });
 
-const wordSchema = new mongoose.Schema({
-  word: String,
-  reads: { type: Number, default: 0},
-  category: String,
+const userSchema = new mongoose.Schema({
+  email: String,
+  password: String
 })
 
-const Word = mongoose.model('Word', wordSchema);
+const User = mongoose.model('User', userSchema);
 
-const save = async(word) => {
-  const newWord = new Word({ word: word })
-  var saved = await newWord.save()
+const createNewUser = async(email, password) => {
+  const newUser = new User({ email: email, password: password})
+  var saved = await newUser.save()
   return saved;
 }
 
-const find = async() => {
-  const data = await Word.find({});
+const findUser = async() => {
+  const data = await User.find({email: email, password: password});
   return data;
 }
 
 module.exports = {
-  save: save,
-  find: find
+  createNewUser: createNewUser,
+  findUser: findUser,
 };

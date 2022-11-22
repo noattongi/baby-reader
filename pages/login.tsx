@@ -6,6 +6,7 @@ export default function Login(){
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
 
+  //need to connect to server for login authentication
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     var loginData = {
@@ -26,7 +27,7 @@ export default function Login(){
           <input style={text_input} name='password' type='password' onChange={(e) => setPassword(e.target.value)}/>
           <button style={button} type='submit'>Submit</button>
         </form>
-        <p style={p}>Don't have an account? <a style={signup_link}><Link href='/signup'>Signup here</Link></a></p>
+        <p style={p}>Don&apos;t have an account? <a style={signup_link}><Link href='/signup'>Signup here</Link></a></p>
       </div>
     </div>
   )
