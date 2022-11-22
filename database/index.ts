@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+import mongoose from 'mongoose';
 mongoose.connect('mongodb://localhost/babyreader');
 
 const db = mongoose.connection;
@@ -13,18 +13,23 @@ db.once('open', () => {
 
 const userSchema = new mongoose.Schema({
   email: String,
-  password: String
+  password: String,
+  words: [{
+    word: String,
+    reads: Number,
+    type:
+  }]
 })
 
 const User = mongoose.model('User', userSchema);
 
-const createNewUser = async(email, password) => {
+const createNewUser = async(email: string, password: string) => {
   const newUser = new User({ email: email, password: password})
   var saved = await newUser.save()
   return saved;
 }
 
-const findUser = async() => {
+const findUser = async(email: string, password: string) => {
   const data = await User.find({email: email, password: password});
   return data;
 }
