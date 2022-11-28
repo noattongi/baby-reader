@@ -43,11 +43,13 @@ const findUser = async(email: string, password: string) => {
   return data;
 }
 
-const addWords = async(email: string, words: [{}]) => {
-
+const updateWords = async(email: string, words: [IWord]) => {
+  const res = await User.updateOne({email: email}, {words: words});
+  return res;
 }
 
 module.exports = {
   createNewUser: createNewUser,
   findUser: findUser,
+  updateWords: updateWords,
 };
