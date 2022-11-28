@@ -3,6 +3,12 @@ mongoose.connect('mongodb://localhost/babyreader');
 
 const db = mongoose.connection;
 
+interface IWord {
+  word: String,
+  reads: Number,
+  category: String,
+}
+
 db.on('error', () => {
   console.log('mongoose connection error');
 });
@@ -17,7 +23,10 @@ const userSchema = new mongoose.Schema({
   words: [{
     word: String,
     reads: Number,
-    type:
+    category: {
+      type: String,
+      enum: ['self', 'object', 'possession', 'food', 'animal', 'action']
+    }
   }]
 })
 
@@ -32,6 +41,10 @@ const createNewUser = async(email: string, password: string) => {
 const findUser = async(email: string, password: string) => {
   const data = await User.find({email: email, password: password});
   return data;
+}
+
+const addWords = async(email: string, words: [{}]) => {
+
 }
 
 module.exports = {
