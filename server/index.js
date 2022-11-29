@@ -14,11 +14,17 @@ app.get('/user', async(req, res) => {
 
 app.post('/user', async(req, res) => {
   console.log(req.body);
+  const user = req.body;
   //check if user already exists
-  const userDoc = await findUser();
+  const userDoc = await findUser(user.email);
   //if it does send a failure response
+  if (userDoc.length > 0) {
+    res.send('exists')
+  }
+  else {
+    res.send('success');
+  }
   //otherwise save the user and hash the password to be saved
-  res.send('request received');
 })
 
 app.listen(3001, () => {

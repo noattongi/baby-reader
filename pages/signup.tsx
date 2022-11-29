@@ -64,9 +64,13 @@ export default function Signup () {
       email: email,
       password: password
     })
-    .then((res) => {
-      console.log('after axios');
-      // router.push('/login');
+    .then(({data}) => {
+      if (data = "success"){
+        // router.push('/login');
+      }
+      else {
+        alert(data);
+      }
     })
     .catch((err) => {
       console.log(err);
