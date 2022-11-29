@@ -1,13 +1,7 @@
-import mongoose from 'mongoose';
+const mongoose = require('mongoose');
 mongoose.connect('mongodb://localhost/babyreader');
 
 const db = mongoose.connection;
-
-interface IWord {
-  word: String,
-  reads: Number,
-  category: String,
-}
 
 db.on('error', () => {
   console.log('mongoose connection error');
@@ -32,18 +26,18 @@ const userSchema = new mongoose.Schema({
 
 const User = mongoose.model('User', userSchema);
 
-const createNewUser = async(email: string, password: string) => {
+const createNewUser = async(email, password) => {
   const newUser = new User({ email: email, password: password})
   var saved = await newUser.save()
   return saved;
 }
 
-const findUser = async(email: string, password: string) => {
+const findUser = async(email, password) => {
   const data = await User.find({email: email, password: password});
   return data;
 }
 
-const updateWords = async(email: string, words: [IWord]) => {
+const updateWords = async(email, words) => {
   const res = await User.updateOne({email: email}, {words: words});
   return res;
 }

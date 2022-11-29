@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
 import {useRouter} from 'next/router';
+import axios from 'axios';
 
 export default function Signup () {
   const router = useRouter();
@@ -59,7 +60,18 @@ export default function Signup () {
       return;
     }
     //reroute to login if all requirements are met
-    router.push('/login');
+    axios.post('http://127.0.0.1:3001/user', {
+      email: email,
+      password: password
+    })
+    .then((res) => {
+      console.log('after axios');
+      // router.push('/login');
+    })
+    .catch((err) => {
+      console.log(err);
+    })
+
   }
 
   return (
