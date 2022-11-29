@@ -65,11 +65,11 @@ export default function Signup () {
       password: password
     })
     .then(({data}) => {
-      if (data = "success"){
-        // router.push('/login');
+      if (data === "success"){
+        router.push('/login')
       }
       else {
-        alert(data);
+        alert('An account has already been created with that email');
       }
     })
     .catch((err) => {
