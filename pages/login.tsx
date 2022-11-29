@@ -1,19 +1,35 @@
+import axios from 'axios';
 import React, {useState} from 'react';
 import Link from 'next/link';
+import {useRouter} from 'next/router';
 
 export default function Login(){
+  const router = useRouter();
 
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
 
-  //need to connect to server for login authentication
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     var loginData = {
       email: email,
       password: password,
     }
-    console.log(loginData)
+    axios.get('http://127.0.0.1:3001/user', {
+      params: loginData,
+    })
+    .then((res) => {
+      const user = res.data;
+      if (user !== null) {
+        if (user.words.length === 0) {
+          router.push('/setup');
+        } else {
+          router.push('/home');
+        }
+      } else {
+        alert('Login information is invalid')
+      }
+    })
   }
 
   return (

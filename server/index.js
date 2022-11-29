@@ -1,18 +1,31 @@
 const express = require('express');
 const cors = require('cors');
 const bcrypt = require('bcrypt');
-var {checkUserExists, validateUser, createNewUser, updateWords} = require('../database/index')
+var {checkUserExists, findUser, createNewUser, updateWords} = require('../database/index')
 
 const app = express();
 app.use(express.json());
 app.use(cors());
 
+//login to user
 app.get('/user', async(req, res) => {
-  const data = await validateUser();
-  console.log(data);
-  res.send(data);
+  const login = req.query;
+  const data = await findUser(login.email);
+  const user = data[0];
+  bcrypt.compare(login.password, user.password)
+  .then((valid) => {
+    if (valid) {
+      res.send(user);
+    } else {
+      res.send(null);
+    }
+  })
+  .catch((err) => {
+    console.log(err);
+  })
 })
 
+//create new user
 app.post('/user', async(req, res) => {
   console.log(req.body);
   const user = req.body;
@@ -36,9 +49,6 @@ app.post('/user', async(req, res) => {
       })
     }
   })
-  //if it does send a failure response
-
-  //otherwise save the user and hash the password to be saved
 })
 
 app.listen(3001, () => {
