@@ -32,7 +32,12 @@ const createNewUser = async(email, password) => {
   return saved;
 }
 
-const findUser = async(email, password) => {
+const checkUserExists = async(email) => {
+  const exists = await User.exists({email: email})
+  return exists;
+}
+
+const validateUser = async(email, password) => {
   const data = await User.find({email: email, password: password});
   return data;
 }
@@ -44,6 +49,7 @@ const updateWords = async(email, words) => {
 
 module.exports = {
   createNewUser: createNewUser,
-  findUser: findUser,
+  validateUser: validateUser,
+  checkUserExists: checkUserExists,
   updateWords: updateWords,
 };

@@ -66,7 +66,7 @@ export default function Signup () {
     })
     .then(({data}) => {
       if (data === "success"){
-        router.push('/login')
+        // router.push('/login')
       }
       else {
         alert('An account has already been created with that email');
