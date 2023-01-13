@@ -47,9 +47,26 @@ const updateWords = async(email, words) => {
   return res;
 }
 
+const wordSchema = new mongoose.Schema({
+  word: String,
+  category: {
+    type: String,
+    enum: ['self', 'object', 'possession', 'food', 'animal', 'action']
+  },
+  reads: Number,
+})
+
+const Word = mongoose.model('Word', wordSchema);
+
+const getDefaultWords = async() => {
+  const words = await Word.find({});
+  return words;
+}
+
 module.exports = {
   createNewUser: createNewUser,
   findUser: findUser,
   checkUserExists: checkUserExists,
   updateWords: updateWords,
+  getDefaultWords: getDefaultWords,
 };

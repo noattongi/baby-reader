@@ -1,3 +1,4 @@
+//These functions no longer exist
 const {save, find} = require('./index.js');
 
 const words = ['dog', 'cat', 'fork', 'refrigerator', 'toy'];

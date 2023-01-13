@@ -1,7 +1,7 @@
 const express = require('express');
 const cors = require('cors');
 const bcrypt = require('bcrypt');
-var {checkUserExists, findUser, createNewUser, updateWords} = require('../database/index')
+var {checkUserExists, findUser, createNewUser, updateWords, getDefaultWords} = require('../database/index')
 
 const app = express();
 app.use(express.json());
@@ -49,6 +49,11 @@ app.post('/user', async(req, res) => {
       })
     }
   })
+})
+
+app.get('/words', async(req, res) => {
+  const words = await getDefaultWords()
+  res.send(words);
 })
 
 app.listen(3001, () => {
