@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import axios from 'axios';
+import WordSelector from './WordSelector'
 
 interface Word {
   word: string;
@@ -12,17 +13,17 @@ interface Props {
   words?: Array<Word>;
 }
 
-const CategorySection: React.FC<Props> = (props: Props) => {
-
-
-
-
+const CategorySection: React.FC<Props> = ({category, words}) => {
+  console.log(words);
   return (
     <div>
-      <h2>{props.category}</h2>
+      <h2>{category}</h2>
       <ul>
-        <li>word</li>
-        <li>word</li>
+        {
+          words?.map((word) => {
+            return (<WordSelector word={word} />)
+          })
+        }
       </ul>
     </div>
   )
